@@ -119,7 +119,13 @@
     name #optional
   error-log-name
   access-log-name -->
+        
         </form>
+        <div class="row">
+          <div class="col-sm-12">
+            <button class="btn btn-primary" id="updateConfig">Update Config</button>
+          </div>
+        </div>
         <section class="row">
             <header>
                 <h2>Conf output</h2>
@@ -189,6 +195,12 @@ server {
     location ~ /\.ht {
            deny all;
     }
+
+    location = /favicon.ico { access_log off; log_not_found off; }
+    location = /robots.txt  { access_log off; log_not_found off; }
+
+    access_log /var/log/nginx/<%= accessLogName %>-access.log;
+    error_log  /var/log/nginx/<%= errorLogName  %>-error.log error;
 }
     </script>
     <script type="text/template" src="js/templates/static-sites.tpl" data-site-type="PHP Site (PHP-FPM)">
@@ -331,6 +343,10 @@ server {
 
       allow all;
   }
+
+  location = /favicon.ico { access_log off; log_not_found off; }
+  location = /robots.txt  { access_log off; log_not_found off; }
+
   access_log /var/log/nginx/<%= accessLogName %>-access.log;
   error_log  /var/log/nginx/<%= errorLogName  %>-error.log error;
 }

@@ -9,6 +9,8 @@ var currentState = {
   index: null
 }
 
+var availableTypeIndexes = [0, 1, 2]
+
 // load the templates
 var $templateEls = document.querySelectorAll("script[type='text/template']")
 var compiled = {}
@@ -17,6 +19,7 @@ var $form = $('#input-form')
 var $confOutputEl = $('#nginx-conf-output')
 var $upstreamContainer = $('#upstreamContainer')
 var $phpOptionsContainer = $('#phpOptionsContainer')
+var $updateCongifBtn = $('#updateConfig')
 
 var siteTypeSelectorContainer = document.getElementById('siteTypeSelector')
 var siteTypeSelectorList = document.getElementById('siteTypeSelectorList')
@@ -47,6 +50,12 @@ window.onpopstate = typeChange
 
 function typeChange () {
   var newTypeIndex = window.location.hash.split('#/')[1]
+
+  // set a default new type
+  if (availableTypeIndexes.indexOf(newTypeIndex) === -1) {
+    newTypeIndex = 0
+  }
+
   console.log('typeChange', currentState, newTypeIndex)
   if (currentState.index !== newTypeIndex) {
     currentState.index = newTypeIndex
@@ -98,5 +107,7 @@ $(document).ready(function () {
 
   // setup event listeners on the inputs
   $form.find('input').on('change.forms', updateConfDisplay)
+
+  $updateCongifBtn.on('click.update', updateConfDisplay)
 })
 
