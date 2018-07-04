@@ -146,7 +146,6 @@
 # server config for <%= siteName %>
 server {
     listen 80;
-    listen [::]:80 ipv6only=on;
     <% if(typeof(isSSL) !== "undefined") { %>
     return 301 https://$host$request_uri;
 }
@@ -207,7 +206,6 @@ server {
 # server config for <%= siteName %>
 server {
     listen 80;
-    listen [::]:80;
     server_name <%= hostname %>;
     <% if(typeof(isSSL) !== "undefined") { %>
     return 301 https://$host$request_uri;
@@ -283,7 +281,7 @@ server {
 }
 
     </script>
-    <script type="text/template" src="js/templates/docker-site.tpl" data-site-type="Docker Site">
+    <script type="text/template" src="js/templates/docker-site.tpl" data-site-type="Docker / Reverse Proxy Site">
 # <%= siteName %> upstream
 upstream <%= upstreamName %> {
   server 127.0.0.1:<%= upstreamPort %> fail_timeout=0;
@@ -292,10 +290,9 @@ upstream <%= upstreamName %> {
 # server config for <%= siteName %>
 server {
   listen 80;
-    listen [::]:80;
-    server_name <%= hostname %>;
-    <% if(typeof(isSSL) !== "undefined") { %>
-    return 301 https://$host$request_uri;
+  server_name <%= hostname %>;
+  <% if(typeof(isSSL) !== "undefined") { %>
+  return 301 https://$host$request_uri;
 }
 
 server {
@@ -317,7 +314,7 @@ server {
         root /var/www/ssl-proof/<%= hostname.split(' ')[0] %>/;
     }
 
-    <% } %>
+<% } %>
 
   keepalive_timeout 180;
   client_max_body_size 1024M;

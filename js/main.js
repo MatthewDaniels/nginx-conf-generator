@@ -49,7 +49,7 @@ siteTypeSelectorList.innerHTML = siteTypeTplText
 window.onpopstate = typeChange
 
 function typeChange () {
-  var newTypeIndex = window.location.hash.split('#/')[1]
+  var newTypeIndex = parseInt(window.location.hash.split('#/')[1])
 
   // set a default new type
   if (availableTypeIndexes.indexOf(newTypeIndex) === -1) {
