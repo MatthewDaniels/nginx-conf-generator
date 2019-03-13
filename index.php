@@ -142,19 +142,19 @@
     </div>
     <!-- /container -->
     <!-- templates -->
-    <script type="text/template" src="js/templates/static-sites.tpl" data-site-type="Static Site">
+    <script type="text/template" src="js/templates/static-site.tpl" data-site-type="Static Site">
       <?php 
-        file_get_contents('./js/templates/static-sites.tpl');
+       echo file_get_contents('./js/templates/static-site.tpl', true);
       ?>
     </script>
     <script type="text/template" src="js/templates/php-site.tpl" data-site-type="PHP Site (PHP-FPM)">
       <?php 
-        file_get_contents('./js/templates/php-site.tpl');
+        echo file_get_contents('./js/templates/php-site.tpl', true);
       ?>
     </script>
     <script type="text/template" src="" data-site-type="Docker / Reverse Proxy Site">
       <?php 
-        file_get_contents('./js/templates/docker-site.tpl');
+        echo file_get_contents('./js/templates/docker-site.tpl', true);
       ?>
     </script>
     <!-- END templates -->

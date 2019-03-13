@@ -13,9 +13,6 @@ server {
     ssl_certificate           /etc/letsencrypt/live/<%= hostname.split(' ')[0] %>/fullchain.pem;
     ssl_certificate_key       /etc/letsencrypt/live/<%= hostname.split(' ')[0] %>/privkey.pem;
 
-    keepalive_timeout 180;
-    client_max_body_size 1024M;
-    fastcgi_read_timeout 960;
 
     # Here we define the web-root for our SSL proof
     location /.well-known {
@@ -27,6 +24,10 @@ server {
 
     <% } %>
 
+    keepalive_timeout 180;
+    client_max_body_size 1024M;
+    fastcgi_read_timeout 960;
+    
     # todo: custom additions like this
     #include /etc/nginx/conf/coolsite/proxy_pass.conf;
 
